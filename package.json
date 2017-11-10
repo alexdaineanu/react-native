@@ -24,6 +24,7 @@
     "react-native": "^0.49.5",
     "react-native-communications": "latest",
     "react-navigation": "latest",
-    "prop-types": "latest"
+    "prop-types": "latest",
+    "react-native-elements": "latest"
   }
 }
