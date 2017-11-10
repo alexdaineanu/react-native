@@ -3,6 +3,12 @@ import {Button, TextInput, View, StyleSheet, Text} from "react-native";
 import * as Communications from "react-native-communications";
 
 export class AddRecipe extends React.Component {
+    constructor(){
+        super();
+        this.email = '';
+        this.name = '';
+        this.content = '';
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -11,21 +17,21 @@ export class AddRecipe extends React.Component {
                 </Text>
                 <TextInput
                     style={{width: "50%", borderWidth: 1, backgroundColor: 'white'}}
-                    onChangeText={(text) => this.setState({email: text})}
+                    onChangeText={(text) => this.email = text}
                     placeholder={"To"}
                 />
                 <TextInput
                     style={{width: "80%", borderWidth: 1, backgroundColor: 'white'}}
-                    onChangeText={(text) => this.setState({subject: text})}
+                    onChangeText={(text) => this.name = text}
                     placeholder={"Subject"}
                 />
                 <TextInput
                     style={{width: "80%", height: "50%", borderWidth: 1, backgroundColor: 'white'}}
-                    onChangeText={(text) => this.setState({content: text})}
+                    onChangeText={(text) => this.content = text}
                     placeholder={"Content"}
                 />
                 <Button title="Send Email"
-                        onPress={() => Communications.email([this.state.email, this.state.email], null, null, this.state.subject, this.state.content)}>
+                        onPress={() => Communications.email([this.email, this.email], null, null, this.name, this.content)}>
                 </Button>
             </View>
         )
