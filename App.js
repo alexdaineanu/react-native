@@ -10,23 +10,24 @@ const RootNavigator = StackNavigator({
         screen: HomeScreen,
         navigationOptions: {headerTitle: 'Food Manager'},
     },
-    AddRecipe:{
+    AddRecipe: {
         screen: AddRecipe,
         navigationOptions: {headerTitle: 'AddRecipe'},
 
     },
-    MyRecipes:{
+    MyRecipes: {
         screen: MyRecipes,
         navigationOption: {headerTitle: 'MyRecipes'},
     },
-    EditRecipe:{
+    EditRecipe: {
         screen: EditRecipe,
         navigationOption: {headerTitle: 'Edit Recipe'},
     },
 });
 
-export default class App extends React.Component{
-    render(){
+
+export default class App extends React.Component {
+    render() {
         return <RootNavigator/>
     }
 }

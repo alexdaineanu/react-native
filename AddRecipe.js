@@ -1,25 +1,19 @@
 import * as React from "react";
-import {Button, TextInput, View, StyleSheet, Text} from "react-native";
-import * as Communications from "react-native-communications";
+import {Button, TextInput, View, StyleSheet, Text, AsyncStorage} from "react-native";
 
 export class AddRecipe extends React.Component {
     constructor(){
         super();
-        this.email = '';
         this.name = '';
         this.content = '';
     }
     render() {
+        const {goBack} = this.props.navigation;
         return (
             <View style={styles.container}>
                 <Text style={{fontSize: 20}}>
-                    SEND AN EMAIL
+                    ADD A RECIPE
                 </Text>
-                <TextInput
-                    style={{width: "50%", borderWidth: 1, backgroundColor: 'white'}}
-                    onChangeText={(text) => this.email = text}
-                    placeholder={"To"}
-                />
                 <TextInput
                     style={{width: "80%", borderWidth: 1, backgroundColor: 'white'}}
                     onChangeText={(text) => this.name = text}
@@ -30,8 +24,21 @@ export class AddRecipe extends React.Component {
                     onChangeText={(text) => this.content = text}
                     placeholder={"Content"}
                 />
-                <Button title="Send Email"
-                        onPress={() => Communications.email([this.email, this.email], null, null, this.name, this.content)}>
+                <Button title="ADD RECIPE"
+                        onPress={() => {
+                            AsyncStorage.getAllKeys().then((value) => {
+                                let current_id = -1;
+                                for (let i = 0; i < value.length; i++) {
+                                    const id = parseInt(value[i], 10);
+                                    if (id > current_id) {
+                                        current_id = id;
+                                    }
+                                }
+                                current_id++;
+                                AsyncStorage.setItem(current_id.toString(), JSON.stringify({"id": current_id, "name": this.name, "content": this.content})).done();
+                            }).done();
+                            goBack();
+                        }}>
                 </Button>
             </View>
         )
