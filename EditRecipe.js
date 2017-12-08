@@ -1,5 +1,5 @@
 import * as React from "react";
-import {TextInput, View, StyleSheet} from "react-native";
+import {TextInput, View, StyleSheet, AsyncStorage} from "react-native";
 import Text from "react-native-elements/src/text/Text";
 import Button from "react-native-elements/src/buttons/Button";
 import { Bar } from 'react-native-pathjs-charts'
@@ -36,7 +36,7 @@ export class EditRecipe extends React.Component {
                 "v": 15,
                 "name": "grape"
             }]
-        ]
+        ];
 
         let options = {
             width: 300,
@@ -107,7 +107,6 @@ export class EditRecipe extends React.Component {
                     placeholder={"Recipe"}>
                     {this.content}
                 </TextInput>
-                <Bar data={data} options={options} accessorKey='v'/>
                 <Button title="Save" onPress={() => {
                     item.setName(this.name);
                     item.setContent(this.content);
@@ -121,6 +120,8 @@ export class EditRecipe extends React.Component {
                     goBack();
                 }}>
                 </Button>
+                <Bar data={data} options={options} accessorKey='v'/>
+
             </View>
         )
     }
