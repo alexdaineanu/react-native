@@ -4732,6 +4732,10 @@ react-native-elements@^0.18.5:
     opencollective "^1.0.3"
     prop-types "^15.5.8"
 
+react-native-fcm@^11.2.0:
+  version "11.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-fcm/-/react-native-fcm-11.2.0.tgz#2c1674ca14b1a94a5cc2298d0468271983d2b1e2"
+
 react-native-gesture-handler@1.0.0-alpha.28:
   version "1.0.0-alpha.28"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.0-alpha.28.tgz#198c776b7b7d299f9b03017f666a9829f996e30d"
@@ -4749,6 +4753,10 @@ react-native-pathjs-charts@0.0.33:
     lodash "^4.12.0"
     paths-js "^0.4.5"
     react-native-svg "~5.5.1"
+
+react-native-push-notification@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-3.0.2.tgz#3fa7d654cfd915436597b0dd5ba8b0f898c4b0f5"
 
 react-native-safe-module@^1.1.0:
   version "1.2.0"

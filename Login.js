@@ -7,7 +7,7 @@ import Button from "react-native-elements/src/buttons/Button";
 export class LoginScreen extends React.Component {
     constructor() {
         super();
-        this.email = 'reduceri.emag.varan@gmail.com';
+        this.email = 'alexdaineanu@gmail.com';
         this.password = 'parola';
     }
 

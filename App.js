@@ -6,6 +6,7 @@ import {MyRecipes} from "./MyRecipes";
 import {EditRecipe} from "./EditRecipe";
 import {LoginScreen} from "./Login";
 import {AdminHomeScreen} from "./MainMenu";
+import {ApproveRecipe} from "./ApproveRecipe";
 import firebase from "firebase/index";
 
 const RootNavigator = StackNavigator({
@@ -34,6 +35,10 @@ const RootNavigator = StackNavigator({
         screen: EditRecipe,
         navigationOption: {headerTitle: 'Edit Recipe'},
     },
+    ApproveRecipe: {
+        screen: ApproveRecipe,
+        navigationOption: {headerTitle: 'Approve Recipe'},
+    }
 });
 
 

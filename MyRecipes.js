@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FlatList, RefreshControl, TouchableOpacity, View} from "react-native";
+import {FlatList, RefreshControl, TouchableOpacity} from "react-native";
 import {Recipe} from "./Recipe";
 import Text from "react-native-elements/src/text/Text";
 import firebase from "firebase/index";
@@ -43,7 +43,7 @@ export class MyRecipes extends React.Component {
     componentWillMount() {
         this.onRefresh();
     }
-    
+
     render() {
         const {navigate} = this.props.navigation;
         if (this.state.refreshing)
@@ -69,11 +69,20 @@ export class MyRecipes extends React.Component {
                                       borderWidth: 0.5,
                                       borderColor: '#d6d7da',
                                   }}
-                                  onPress={() => (
-                                      navigate("EditRecipe", {
-                                          item: item,
-                                          refresh: this.onRefresh
-                                      }))}
+                                  onPress={() => {
+                                      if (firebase.auth().currentUser.email === 'alexdaineanu@gmail.com') {
+                                          navigate("ApproveRecipe", {
+                                              item: item,
+                                              refresh: this.onRefresh
+                                          })
+                                      }
+                                      else {
+                                          navigate("EditRecipe", {
+                                              item: item,
+                                              refresh: this.onRefresh
+                                          })
+                                      }
+                                  }}
                                   onLongPress={() => {
                                       firebase.database().ref("recipes").child(item.getId()).remove();
                                       this.onRefresh();
