@@ -1,8 +1,9 @@
 import * as React from "react";
-import {TextInput, View, StyleSheet, AsyncStorage} from "react-native";
+import {TextInput, View, StyleSheet} from "react-native";
 import Text from "react-native-elements/src/text/Text";
 import Button from "react-native-elements/src/buttons/Button";
 import { Bar } from 'react-native-pathjs-charts'
+import firebase from "firebase/index";
 
 
 export class EditRecipe extends React.Component {
@@ -11,7 +12,6 @@ export class EditRecipe extends React.Component {
         this.name = '';
         this.content = '';
     }
-
 
     render() {
         let data = [
@@ -83,7 +83,7 @@ export class EditRecipe extends React.Component {
                     fill: '#34495E'
                 }
             }
-        }
+        };
         const {goBack} = this.props.navigation;
         const {item} = this.props.navigation.state.params;
         const {refresh} = this.props.navigation.state.params;
@@ -110,12 +110,7 @@ export class EditRecipe extends React.Component {
                 <Button title="Save" onPress={() => {
                     item.setName(this.name);
                     item.setContent(this.content);
-                    AsyncStorage.getItem(item.getId().toString()).then((value) => {
-                        let recipeJson = JSON.parse(value);
-                        recipeJson['name'] = this.name;
-                        recipeJson['content'] = this.content;
-                        AsyncStorage.setItem(item.getId().toString(), JSON.stringify(recipeJson)).done();
-                    }).done();
+                    firebase.database().ref("recipes").child(item.getId()).update(item);
                     refresh();
                     goBack();
                 }}>

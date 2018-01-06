@@ -1,5 +1,6 @@
 import * as React from "react";
-import {Button, TextInput, View, StyleSheet, Text, AsyncStorage, Picker} from "react-native";
+import {Button, TextInput, View, StyleSheet, Text} from "react-native";
+import firebase from 'firebase';
 
 export class AddRecipe extends React.Component {
     constructor(){
@@ -7,6 +8,7 @@ export class AddRecipe extends React.Component {
         this.name = '';
         this.content = '';
     }
+
     render() {
         const {goBack} = this.props.navigation;
         return (
@@ -26,17 +28,14 @@ export class AddRecipe extends React.Component {
                 />
                 <Button title="ADD RECIPE"
                         onPress={() => {
-                            AsyncStorage.getAllKeys().then((value) => {
-                                let current_id = -1;
-                                for (let i = 0; i < value.length; i++) {
-                                    const id = parseInt(value[i], 10);
-                                    if (id > current_id) {
-                                        current_id = id;
-                                    }
-                                }
-                                current_id++;
-                                AsyncStorage.setItem(current_id.toString(), JSON.stringify({"id": current_id, "name": this.name, "content": this.content})).done();
-                            }).done();
+                            let id = firebase.database().ref().child('recipes').push().key;
+                            firebase.database().ref('recipes').child(id).update({
+                                id: id,
+                                name: this.name,
+                                content: this.content,
+                                email: firebase.auth().currentUser.email,
+                                approved: false
+                            });
                             goBack();
                         }}>
                 </Button>
